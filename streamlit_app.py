@@ -1,7 +1,7 @@
 import streamlit
 import pandas
 
-streamlit.title('My Mom's New Healthy Diner')
+streamlit.title('My Mom\'s New Healthy Diner')
 
 streamlit.header('Breakfast Favourites')
 streamlit.text('🥣Omega 3 & Blueberry Oatmeal')
@@ -14,7 +14,8 @@ my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.co
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
 #Pick list to allow users to select fruits to go into their smoothie
-streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
+fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
+fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 #Displays table with fruits on the page
 streamlit.dataframe(my_fruit_list)
