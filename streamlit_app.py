@@ -11,4 +11,9 @@ streamlit.text('🥑🍞Avocado Toast')
 
 streamlit.header('🍌🥭Build Your Own Fruit Smoothie🥝🍇')
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
+
+#Pick list to allow users to select fruits to go into their smoothie
+streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index))
+
+#Displays table with fruits on the page
 streamlit.dataframe(my_fruit_list)
