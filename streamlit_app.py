@@ -2,7 +2,7 @@ import streamlit
 import pandas
 import requests
 import snowflake.connector
-import urllib.error
+from urllib.error import URLError
 
 streamlit.title('My Mom\'s New Healthy Diner')
 
@@ -42,11 +42,10 @@ try:
     back_from_function = get_fruityvice_data(fruit_choice)
     #displays the normalize response in a table
     streamlit.dataframe(fruityvice_normalized)
-
 except URLError as e:
   streamlit.error()
 
-streamlit.header("The fruit load list contains:")
+streamlit.header("View Our Fruit List - Add Your Favorites!")
 
 #snowflake related functions
 def get_fruit_load_list():
@@ -55,7 +54,7 @@ def get_fruit_load_list():
     return my_cur.fetchall()
 
 #Add a button to load the fruit
-if streamlit.button("Get Frit Load List"):
+if streamlit.button("Get Fruit Load List"):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_rows = get_fruit_load_list()
   my_cnx.close()
